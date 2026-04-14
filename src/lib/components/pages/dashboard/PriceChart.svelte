@@ -25,13 +25,14 @@
 		data.map((d) => ({
 			total: Number.isFinite(d.totalValue) ? d.totalValue : 0,
 			byreal: Number.isFinite(d.byrealValue) ? d.byrealValue : 0,
+			raydium: Number.isFinite(d.raydiumValue) ? d.raydiumValue : 0,
 			meteora: Number.isFinite(d.meteoraValue) ? d.meteoraValue : 0
 		}))
 	);
 
 	const allValues = $derived(
 		showBreakdown
-			? normalized.flatMap((d) => [d.byreal, d.meteora])
+			? normalized.flatMap((d) => [d.byreal, d.raydium, d.meteora])
 			: normalized.map((d) => d.total)
 	);
 
@@ -61,6 +62,7 @@
 	const pointsTotal = $derived(toPolyline(normalized.map((d) => d.total)));
 	const areaTotal = $derived(toArea(normalized.map((d) => d.total)));
 	const pointsByreal = $derived(toPolyline(normalized.map((d) => d.byreal)));
+	const pointsRaydium = $derived(toPolyline(normalized.map((d) => d.raydium)));
 	const pointsMeteora = $derived(toPolyline(normalized.map((d) => d.meteora)));
 
 	const startValue = $derived(data[0]?.totalValue ?? 0);
@@ -107,6 +109,10 @@
 				<stop offset="0%" stop-color="#60a5fa" stop-opacity="0.18" />
 				<stop offset="100%" stop-color="#60a5fa" stop-opacity="0" />
 			</linearGradient>
+			<linearGradient id="grad-raydium" x1="0" x2="0" y1="0" y2="1">
+				<stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.18" />
+				<stop offset="100%" stop-color="#2dd4bf" stop-opacity="0" />
+			</linearGradient>
 			<linearGradient id="grad-meteora" x1="0" x2="0" y1="0" y2="1">
 				<stop offset="0%" stop-color="#fbbf24" stop-opacity="0.18" />
 				<stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
@@ -117,6 +123,8 @@
 			{#if showBreakdown}
 				<polygon fill="url(#grad-byreal)" points={toArea(normalized.map((d) => d.byreal))} />
 				<polyline fill="none" stroke="#60a5fa" stroke-width="1.5" points={pointsByreal} />
+				<polygon fill="url(#grad-raydium)" points={toArea(normalized.map((d) => d.raydium))} />
+				<polyline fill="none" stroke="#2dd4bf" stroke-width="1.5" points={pointsRaydium} />
 				<polygon fill="url(#grad-meteora)" points={toArea(normalized.map((d) => d.meteora))} />
 				<polyline fill="none" stroke="#fbbf24" stroke-width="1.5" points={pointsMeteora} />
 			{:else}
@@ -134,6 +142,7 @@
 				/>
 				{#if showBreakdown}
 					<circle cx={hx} cy={yAt(hoveredData.byrealValue)} r="3.5" fill="#60a5fa" />
+					<circle cx={hx} cy={yAt(hoveredData.raydiumValue)} r="3.5" fill="#2dd4bf" />
 					<circle cx={hx} cy={yAt(hoveredData.meteoraValue)} r="3.5" fill="#fbbf24" />
 				{:else}
 					<circle cx={hx} cy={yAt(hoveredData.totalValue)} r="3.5" fill={colorTotal} />

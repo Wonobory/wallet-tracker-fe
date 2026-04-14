@@ -92,18 +92,30 @@
 					class="mt-4 flex gap-5 border-t border-white/[0.06] pt-4 transition-opacity duration-150"
 					class:opacity-40={service.chartState.loading}
 				>
-					<div>
-						<p class="text-xs text-zinc-500">Byreal</p>
-						<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-blue-400">
-							${service.formattedByrealValue}
-						</p>
-					</div>
-					<div>
-						<p class="text-xs text-zinc-500">Meteora</p>
-						<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-amber-400">
-							${service.formattedMeteoraValue}
-						</p>
-					</div>
+					{#if service.byrealValue > 0}
+						<div>
+							<p class="text-xs text-zinc-500">Byreal</p>
+							<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-blue-400">
+								${service.formattedByrealValue}
+							</p>
+						</div>
+					{/if}
+					{#if service.raydiumValue > 0}
+						<div>
+							<p class="text-xs text-zinc-500">Raydium</p>
+							<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-teal-400">
+								${service.formattedRaydiumValue}
+							</p>
+						</div>
+					{/if}
+					{#if service.meteoraValue > 0}
+						<div>
+							<p class="text-xs text-zinc-500">Meteora</p>
+							<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-amber-400">
+								${service.formattedMeteoraValue}
+							</p>
+						</div>
+					{/if}
 					{#if service.walletValue > 0}
 						<div>
 							<p class="text-xs text-zinc-500">Wallet</p>

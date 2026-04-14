@@ -46,6 +46,9 @@ export class WealthDisplayService {
 	byrealValue = $derived(
 		this.hoveredDataPoint?.byrealValue ?? this.chartState.data?.at(-1)?.byrealValue ?? 0
 	);
+	raydiumValue = $derived(
+		this.hoveredDataPoint?.raydiumValue ?? this.chartState.data?.at(-1)?.raydiumValue ?? 0
+	);
 	meteoraValue = $derived(
 		this.hoveredDataPoint?.meteoraValue ?? this.chartState.data?.at(-1)?.meteoraValue ?? 0
 	);
@@ -92,6 +95,7 @@ export class WealthDisplayService {
 
 	formattedCurrentValue = $derived(formatUsd(this.currentValue));
 	formattedByrealValue = $derived(formatUsd(this.byrealValue));
+	formattedRaydiumValue = $derived(formatUsd(this.raydiumValue));
 	formattedMeteoraValue = $derived(formatUsd(this.meteoraValue));
 	formattedWalletValue = $derived(formatUsd(this.walletValue));
 	formattedNominalChange = $derived(formatUsd(Math.abs(this.nominalChange)));
@@ -128,6 +132,7 @@ export class WealthDisplayService {
 				date: new SvelteDate(p.timestamp as string).toISOString(),
 				totalValue: Number(p.totalValue ?? 0),
 				byrealValue: Number(p.byrealValue ?? 0),
+				raydiumValue: Number(p.raydiumValue ?? 0),
 				meteoraValue: Number(p.meteoraValue ?? 0),
 				walletValue: Number(p.walletValue ?? 0),
 				spyxPrice: Number(p.spyxPrice ?? 0)

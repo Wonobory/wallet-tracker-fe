@@ -4,6 +4,7 @@ export type DataPoint = {
 	date: string;
 	totalValue: number;
 	byrealValue: number;
+	raydiumValue: number;
 	meteoraValue: number;
 	walletValue: number;
 	spyxPrice: number;
