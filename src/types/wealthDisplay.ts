@@ -7,6 +7,7 @@ export type DataPoint = {
 	raydiumValue: number;
 	meteoraValue: number;
 	walletValue: number;
+	lighterValue: number;
 	spyxPrice: number;
 };
 

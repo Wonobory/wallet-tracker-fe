@@ -124,6 +124,14 @@
 							</p>
 						</div>
 					{/if}
+					{#if service.lighterValue > 0}
+						<div>
+							<p class="text-xs text-zinc-500">Lighter</p>
+							<p class="mt-0.5 font-mono text-sm font-medium tabular-nums text-sky-400">
+								${service.formattedLighterValue}
+							</p>
+						</div>
+					{/if}
 				</div>
 
 			{:else}

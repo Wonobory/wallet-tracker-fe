@@ -55,6 +55,9 @@ export class WealthDisplayService {
 	walletValue = $derived(
 		this.hoveredDataPoint?.walletValue ?? this.chartState.data?.at(-1)?.walletValue ?? 0
 	);
+	lighterValue = $derived(
+		this.hoveredDataPoint?.lighterValue ?? this.chartState.data?.at(-1)?.lighterValue ?? 0
+	);
 	startValue = $derived(this.chartState.data?.[0]?.totalValue ?? 0);
 	changePercent = $derived(
 		this.startValue ? ((this.currentValue - this.startValue) / this.startValue) * 100 : 0
@@ -98,6 +101,7 @@ export class WealthDisplayService {
 	formattedRaydiumValue = $derived(formatUsd(this.raydiumValue));
 	formattedMeteoraValue = $derived(formatUsd(this.meteoraValue));
 	formattedWalletValue = $derived(formatUsd(this.walletValue));
+	formattedLighterValue = $derived(formatUsd(this.lighterValue));
 	formattedNominalChange = $derived(formatUsd(Math.abs(this.nominalChange)));
 
 	private authHeaders(): HeadersInit {
@@ -135,6 +139,7 @@ export class WealthDisplayService {
 				raydiumValue: Number(p.raydiumValue ?? 0),
 				meteoraValue: Number(p.meteoraValue ?? 0),
 				walletValue: Number(p.walletValue ?? 0),
+				lighterValue: Number(p.lighterValue ?? 0),
 				spyxPrice: Number(p.spyxPrice ?? 0)
 			}));
 
